@@ -1,0 +1,56 @@
+﻿@model IEnumerable<PlayerDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Players</h1>
+
+<style>
+    ul#menu li {
+        display: inline;
+        padding-right: 220px;
+        font-size: 30px;
+    }
+</style>
+
+<p>
+    <a asp-action="AddNewPlayer">Add New PLayer</a>
+</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Search">
+            <div class="form-group">
+                <label for="Name" class="control-label"></label>
+                <input name="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div><ul id="menu">
+    <li>Name</li>
+    <li>Team</li>
+</ul>
+
+<table class="table">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Team)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
